@@ -1,0 +1,154 @@
+.section {
+  width: 314px;
+  max-width: 512px;
+  height: 578px;
+
+  padding: 62px 99px 48px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  border-radius: 4px;
+
+  box-shadow: 2px 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.formGroup {
+  width: 100%;
+  margin-bottom: 10%;
+}
+
+.textInputContainer {
+  position: relative;
+  font-size: 1.2rem;
+}
+
+.inputIcon {
+  font-size: 2.2rem;
+  position: absolute;
+  left: 8px;
+  top: 4px;
+}
+
+.input {
+  font-size: 1rem;
+  width: 86.4%;
+  padding-left: 1.6rem;
+  padding: 0.6rem 0rem 0.6rem 2.4rem;
+  outline: none;
+}
+
+.input:focus {
+  outline: none;
+  border: 2px solid black;
+}
+
+.label {
+  display: inline-block;
+  font-size: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.error {
+  border: 2px solid rgb(255, 164, 164);
+}
+
+.error:focus {
+  border: 2px solid red;
+  outline: none;
+}
+
+.errorText {
+  font-size: 0.9rem;
+  width: 100%;
+  left: 0;
+  bottom: -24px;
+  position: absolute;
+  color: red;
+}
+
+.emailError {
+  bottom: -22px;
+}
+
+.passwordError {
+  bottom: -40px;
+}
+
+.button {
+  font-size: 1rem;
+  height: 40px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.demoUserButton {
+  background-color: white;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+}
+
+.demoUserButton:hover {
+  background-color: #f8f8f8;
+}
+
+.submitButton {
+  background-color: #2694d4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-top: 8%;
+}
+
+.submitButton:hover {
+  background-color: #1e7792;
+}
+
+.logo {
+  width: 82px;
+}
+
+.logoText {
+  height: 50px;
+}
+
+.fetching {
+  pointer-events: none;
+  background-color: #1e7792;
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 560px) {
+  body {
+    overflow: hidden;
+  }
+
+  .section {
+    height: 100%;
+    width: 100%;
+    max-width: none;
+    padding: 64px 24px;
+    box-shadow: none;
+    box-sizing: border-box;
+  }
+
+  .input {
+    width: 90.6%;
+  }
+}
