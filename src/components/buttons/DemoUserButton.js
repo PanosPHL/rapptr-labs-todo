@@ -1,12 +1,19 @@
 import React from 'react';
 import styles from '../../css-modules/Login.module.css';
 
-const DemoUserButton = () => {
+const DemoUserButton = ({ login }) => {
+  const handleClick = async () => {
+    const res = await login('test@rapptrlabs.com', 'Test123');
+  };
+
   return (
-    <button className={`${styles.button} ${styles.demoUserButton}`}>
+    <button
+      onClick={handleClick}
+      className={`${styles.button} ${styles.demoUserButton}`}
+    >
       Continue as Demo User
     </button>
   );
 };
 
-export default DemoUserButton;
+export default React.memo(DemoUserButton);

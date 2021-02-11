@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useReducer } from 'react';
+import React, { useCallback, useReducer } from 'react';
 import SubmitButton from '../inputs/SubmitButton';
 import TextInput from '../inputs/TextInput';
 import { validateEmail, validatePassword } from '../../../util/validations';
@@ -11,6 +11,7 @@ import {
   CLEAR_ERRORS,
 } from './constants';
 import styles from '../../../css-modules/Login.module.css';
+import { useHistory } from 'react-router-dom';
 
 const initialState = {
   email: '',
@@ -20,6 +21,7 @@ const initialState = {
     email: false,
     password: false,
     submit: false,
+    validSubmission: false,
   },
 };
 
@@ -55,30 +57,47 @@ function loginReducer(state, action) {
   }
 }
 
-const LoginForm = () => {
+const LoginForm = ({ login }) => {
   const [{ email, password, fetching, errors }, dispatch] = useReducer(
     loginReducer,
     initialState
   );
+  const history = useHistory();
 
-  const handleEmailChange = (email) => {
+  const handleEmailChange = useCallback((email) => {
     dispatch({ type: SET_EMAIL, payload: email });
-  };
+  }, []);
 
-  const handlePasswordChange = (password) => {
+  const handlePasswordChange = useCallback((password) => {
     dispatch({ type: SET_PASSWORD, payload: password });
-  };
+  }, []);
 
-  const handleErrorChange = (field, type) => {
+  const handleErrorChange = useCallback((field, type) => {
     dispatch({
       type: type === 'set' ? SET_ERROR : CLEAR_ERROR,
       payload: field,
     });
-  };
+  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (errors.email || errors.password) {
+      return;
+    }
+
     dispatch({ type: SET_FETCHING, payload: true });
+
+    const res = await login(email, password);
+
+    dispatch({ type: SET_FETCHING, payload: false });
+
+    if (res.status >= 500) {
+      dispatch({ type: SET_ERROR, payload: 'submit' });
+      return;
+    } else {
+      dispatch({ type: SET_ERROR, payload: 'validSubmission' });
+      return;
+    }
   };
 
   return (
@@ -92,6 +111,7 @@ const LoginForm = () => {
         validator={validateEmail}
         error={errors.email}
         handleErrorChange={handleErrorChange}
+        validSubmissionError={errors.validSubmission}
       />
       <TextInput
         value={password}
@@ -102,17 +122,28 @@ const LoginForm = () => {
         validator={validatePassword}
         error={errors.password}
         handleErrorChange={handleErrorChange}
+        validSubmissionError={errors.validSubmission}
       />
-      <SubmitButton
-        text="Login"
-        fetching={fetching}
-        error={errors.email || errors.password}
-      />{' '}
-      {errors.submit ? (
-        <span>The server could not be reached. Please try again later.</span>
-      ) : (
-        <></>
-      )}
+      <div style={{ position: 'relative', width: '100%' }}>
+        <SubmitButton
+          text="Login"
+          fetching={fetching}
+          error={errors.email || errors.password}
+        />{' '}
+        {errors.submit || errors.validSubmission ? (
+          <p
+            className={`${styles.errorText} ${
+              errors.submit ? styles.submitError : styles.validSubmissionError
+            }`}
+          >
+            {errors.submit
+              ? 'The server could not be reached. Please try again later.'
+              : 'Invalid credentials'}
+          </p>
+        ) : (
+          <></>
+        )}
+      </div>
     </form>
   );
 };

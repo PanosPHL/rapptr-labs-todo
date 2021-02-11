@@ -16,4 +16,4 @@ const SubmitButton = ({ text, fetching, error }) => {
   );
 };
 
-export default SubmitButton;
+export default React.memo(SubmitButton);

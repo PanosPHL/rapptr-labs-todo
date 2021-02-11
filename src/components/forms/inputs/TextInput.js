@@ -11,7 +11,22 @@ const TextInput = ({
   validator,
   error,
   handleErrorChange,
+  validSubmissionError,
 }) => {
+  const onChange = (e) => {
+    if (!validator(e.target.value)) {
+      handleErrorChange(type, 'set');
+    } else {
+      handleErrorChange(type, 'clear');
+    }
+
+    if (validSubmissionError) {
+      handleErrorChange('validSubmission', 'clear');
+    }
+
+    setValue(e.target.value);
+  };
+
   return (
     <div className={styles.formGroup}>
       <label className={styles.label} htmlFor={type}>
@@ -22,22 +37,16 @@ const TextInput = ({
         <input
           className={styles.input + (error ? ` ${styles.error}` : '')}
           type={type === 'password' || type === 'email' ? type : 'text'}
-          onChange={(e) => {
-            if (!validator(e.target.value)) {
-              handleErrorChange(type, 'set');
-            } else {
-              handleErrorChange(type, 'clear');
-            }
-            setValue(e.target.value);
-          }}
+          onChange={onChange}
           placeholder={placeholder}
+          value={value}
         />
         {error ? (
-          <span className={`${styles.errorText} ${styles[type + 'Error']}`}>
+          <p className={`${styles.errorText} ${styles[type + 'Error']}`}>
             {type === 'email'
               ? 'Not a valid email'
               : 'A password must be between 4 and 16 characters'}
-          </span>
+          </p>
         ) : (
           <></>
         )}
@@ -46,4 +55,4 @@ const TextInput = ({
   );
 };
 
-export default TextInput;
+export default React.memo(TextInput);
