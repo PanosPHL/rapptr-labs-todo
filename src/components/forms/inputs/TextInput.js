@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import capitalize from '../../../util/capitalize';
 import styles from '../../../css-modules/Login.module.css';
 
@@ -53,6 +54,18 @@ const TextInput = ({
       </div>
     </div>
   );
+};
+
+TextInput.propTypes = {
+  value: PropTypes.string.isRequired,
+  setValue: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+  validator: PropTypes.func.isRequired,
+  error: PropTypes.bool.isRequired,
+  handleErrorChange: PropTypes.func.isRequired,
+  validSubmissionError: PropTypes.bool.isRequired,
 };
 
 export default React.memo(TextInput);

@@ -42,7 +42,7 @@ function App() {
           render={() => <AuthPage type="Login" login={login} />}
         />
         <AuthRoute
-          isLoggedIn={user && user.user_id ? user.user_id : null}
+          isLoggedIn={user && user.user_id ? true : false}
           path="/"
           component={Home}
         />

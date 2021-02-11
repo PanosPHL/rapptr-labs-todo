@@ -1,4 +1,5 @@
 import React, { useCallback, useReducer } from 'react';
+import PropTypes from 'prop-types';
 import SubmitButton from '../inputs/SubmitButton';
 import TextInput from '../inputs/TextInput';
 import { validateEmail, validatePassword } from '../../../util/validations';
@@ -146,6 +147,10 @@ const LoginForm = ({ login }) => {
       </div>
     </form>
   );
+};
+
+LoginForm.propTypes = {
+  login: PropTypes.func.isRequired,
 };
 
 export default LoginForm;
