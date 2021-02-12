@@ -17,7 +17,7 @@
 
   border-radius: 4px;
 
-  box-shadow: 2px 1px 6px rgba(0, 0, 0, 0.4);
+  border: 1px solid black;
 }
 
 .authButton {
@@ -63,7 +63,6 @@
 
 .search:focus {
   border: 2px solid rgb(0, 0, 0);
-  box-sizing: border-box;
   outline: none;
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from '../../css-modules/Tasks.module.css';
 
 const LogoutButton = ({ logout }) => {
@@ -9,4 +10,8 @@ const LogoutButton = ({ logout }) => {
   );
 };
 
-export default LogoutButton;
+LogoutButton.propTypes = {
+  logout: PropTypes.func.isRequired,
+};
+
+export default React.memo(LogoutButton);

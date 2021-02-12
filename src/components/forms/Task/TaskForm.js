@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { validateTask } from '../../../util/validations';
 import styles from '../../../css-modules/Tasks.module.css';
 
@@ -64,6 +65,14 @@ const TaskForm = ({ type, initText, id, saveTask, setEditTask }) => {
       )}
     </>
   );
+};
+
+TaskForm.propTypes = {
+  type: PropTypes.string.isRequired,
+  initText: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  saveTask: PropTypes.func.isRequired,
+  setEditTask: PropTypes.func,
 };
 
 export default TaskForm;

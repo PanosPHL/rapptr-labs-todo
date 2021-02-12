@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import TaskForm from '../forms/Task/TaskForm';
 import styles from '../../css-modules/Tasks.module.css';
 
@@ -37,4 +38,12 @@ const Task = ({ initText, id, saveTask, deleteTask, noBorder }) => {
   );
 };
 
-export default Task;
+Task.propTypes = {
+  initText: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  saveTask: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func.isRequired,
+  noBorder: PropTypes.bool,
+};
+
+export default React.memo(Task);

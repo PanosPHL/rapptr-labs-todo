@@ -12,7 +12,6 @@ import {
   CLEAR_ERRORS,
 } from './constants';
 import styles from '../../../css-modules/Login.module.css';
-import { useHistory } from 'react-router-dom';
 
 const initialState = {
   email: '',

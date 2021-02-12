@@ -1,8 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { Switch, Route, useHistory } from 'react-router-dom';
-import Home from './components/pages/Home';
-import AuthPage from './components/pages/AuthPage';
+import React, { useState, useCallback, useEffect, Suspense } from 'react';
+import { Switch, useHistory } from 'react-router-dom';
 import AuthRoute from './components/universal/AuthRoute';
+import Loading from './components/pages/Loading';
+
+const Home = React.lazy(() => import('./components/pages/Home'));
+const AuthPage = React.lazy(() => import('./components/pages/AuthPage'));
 
 function App() {
   const [user, setUser] = useState(null);
@@ -53,27 +55,29 @@ function App() {
   };
 
   return (
-    <div className="page-content">
-      <Switch>
-        <AuthRoute
-          exact={true}
-          path="/login"
-          isLoggedIn={user && user.user_id ? true : false}
-          render={() => (
-            <AuthPage
-              isLoggedIn={user && user.user_id ? true : false}
-              type="Login"
-              login={login}
-            />
-          )}
-        />
-        <AuthRoute
-          isLoggedIn={user && user.user_id ? true : false}
-          path="/"
-          render={() => <Home logout={logout} />}
-        />
-      </Switch>
-    </div>
+    <Suspense fallback={<Loading />}>
+      <div className="page-content">
+        <Switch>
+          <AuthRoute
+            exact={true}
+            path="/login"
+            isLoggedIn={user && user.user_id ? true : false}
+            render={() => (
+              <AuthPage
+                isLoggedIn={user && user.user_id ? true : false}
+                type="Login"
+                login={login}
+              />
+            )}
+          />
+          <AuthRoute
+            isLoggedIn={user && user.user_id ? true : false}
+            path="/"
+            render={() => <Home logout={logout} />}
+          />
+        </Switch>
+      </div>
+    </Suspense>
   );
 }
 

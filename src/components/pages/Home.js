@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import LogoutButton from '../buttons/LogoutButton';
 import TaskForm from '../forms/Task/TaskForm';
 import Task from '../misc/Task';
@@ -31,33 +32,39 @@ const Home = ({ logout }) => {
     );
   }, [idNum, tasks]);
 
-  const saveTask = (e, type, task) => {
-    e.preventDefault();
+  const saveTask = useCallback(
+    (e, type, task) => {
+      e.preventDefault();
 
-    if (type === 'new') {
-      setTasks([...tasks, task]);
-      setIdNum((prevState) => prevState + 1);
-      setNewTask(false);
-      return;
-    }
+      if (type === 'new') {
+        setTasks((tasks) => [...tasks, task]);
+        setIdNum((prevState) => prevState + 1);
+        setNewTask(false);
+        return;
+      }
 
-    const index = tasks.findIndex((t) => t.id === task.id);
-    setTasks((prevState) => [
-      ...prevState.slice(0, index),
-      task,
-      ...prevState.slice(index + 1),
-    ]);
-  };
+      const index = tasks.findIndex((t) => t.id === task.id);
+      setTasks((prevState) => [
+        ...prevState.slice(0, index),
+        task,
+        ...prevState.slice(index + 1),
+      ]);
+    },
+    [tasks]
+  );
 
-  const deleteTask = (e, task) => {
-    e.preventDefault();
+  const deleteTask = useCallback(
+    (e, task) => {
+      e.preventDefault();
 
-    const index = tasks.findIndex((t) => t.id === task.id);
-    setTasks((prevState) => [
-      ...prevState.slice(0, index),
-      ...prevState.slice(index + 1),
-    ]);
-  };
+      const index = tasks.findIndex((t) => t.id === task.id);
+      setTasks((prevState) => [
+        ...prevState.slice(0, index),
+        ...prevState.slice(index + 1),
+      ]);
+    },
+    [tasks]
+  );
 
   return (
     <>
@@ -133,6 +140,10 @@ const Home = ({ logout }) => {
       </main>
     </>
   );
+};
+
+Home.propTypes = {
+  logout: PropTypes.func.isRequired,
 };
 
 export default Home;
