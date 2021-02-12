@@ -15,3 +15,7 @@ export const validatePassword = (password) => {
 
   return password.length >= 4 && password.length <= 16;
 };
+
+export const validateTask = (task) => {
+  return task.length && task.length <= 25;
+};

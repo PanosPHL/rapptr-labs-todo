@@ -1,6 +1,6 @@
-import React, { useCallback, useReducer } from 'react';
+import React, { useCallback, useEffect, useReducer, useRef } from 'react';
 import PropTypes from 'prop-types';
-import SubmitButton from '../inputs/SubmitButton';
+import SubmitButton from '../../buttons/SubmitButton';
 import TextInput from '../inputs/TextInput';
 import { validateEmail, validatePassword } from '../../../util/validations';
 import {
@@ -34,7 +34,6 @@ function loginReducer(state, action) {
       newState.email = action.payload;
       return newState;
     case SET_PASSWORD:
-      console.log(action);
       newState.password = action.payload;
       return newState;
     case SET_ERROR:
@@ -63,7 +62,11 @@ const LoginForm = ({ login }) => {
     loginReducer,
     initialState
   );
-  const history = useHistory();
+  const emailRef = useRef();
+
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
 
   const handleEmailChange = useCallback((email) => {
     dispatch({ type: SET_EMAIL, payload: email });
@@ -113,6 +116,7 @@ const LoginForm = ({ login }) => {
         error={errors.email}
         handleErrorChange={handleErrorChange}
         validSubmissionError={errors.validSubmission}
+        ref={emailRef}
       />
       <TextInput
         value={password}

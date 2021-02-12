@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from '../../../css-modules/Login.module.css';
+import styles from '../../css-modules/Login.module.css';
 
 const SubmitButton = ({ text, fetching, error }) => {
   return (
     <button
       className={
-        `${styles.button} ${styles.submitButton}` +
+        `button ${styles.authButton}` +
         (fetching ? ` ${styles.fetching}` : '') +
-        (error ? ` ${styles.disabled}` : '')
+        (error ? ' disabled' : '')
       }
       type="submit"
     >

@@ -1,0 +1,256 @@
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  height: 700px;
+  width: 28%;
+  min-width: 600px;
+
+  border-radius: 4px;
+
+  box-shadow: 2px 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+.authButton {
+  background-color: #2694d4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 100px;
+}
+
+.authButton:hover,
+.taskButton:hover,
+.authButton:active,
+.taskButton:active {
+  cursor: pointer;
+  background-color: #1e7792;
+}
+
+.editSaveButton:hover {
+  filter: brightness(0.8);
+  background-color: black;
+}
+
+.authButton:focus,
+.taskButton:focus {
+  outline: none;
+}
+
+.search,
+.editTask {
+  font-size: 1.6rem;
+  padding: 2px 8px;
+}
+
+.search {
+  border-radius: 14px;
+  box-shadow: none;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  padding-left: 52px;
+  max-width: 300px;
+}
+
+.search:focus {
+  border: 2px solid rgb(0, 0, 0);
+  box-sizing: border-box;
+  outline: none;
+}
+
+.searchIcon {
+  position: absolute;
+  font-size: 1.6rem;
+  color: rgba(0, 0, 0, 0.5);
+  top: 6px;
+  left: 16px;
+}
+
+.editTask {
+  font-size: 1.2rem;
+  padding: 2px 4px;
+}
+
+.taskButton {
+  background-color: #2694d4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 100px;
+  height: 38px;
+}
+
+.editSaveButton {
+  background-color: black;
+  height: 32px;
+}
+
+.searchContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 48px 24px;
+  border-bottom: 1px solid black;
+
+  box-sizing: border-box;
+}
+
+.header {
+  font-size: 4rem;
+  margin: 2rem 0px;
+}
+
+.taskRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 86px;
+  padding: 0 24px;
+  border-bottom: 1px solid black;
+  box-sizing: border-box;
+}
+
+.taskForm {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tasksContainer {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+  overflow: hidden;
+}
+
+.tasksContainer:hover {
+  overflow-y: auto;
+}
+
+.tasksContainer::-webkit-scrollbar {
+  background-color: white;
+  width: 12px;
+}
+
+.tasksContainer::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border-radius: 8px;
+}
+
+.taskRowButton {
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.6rem;
+}
+
+.taskRowButton:hover,
+.taskRowButton:active {
+  background-color: #cecece;
+}
+
+.taskRowButton:focus {
+  outline: none;
+}
+
+.taskRowButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 72px;
+}
+
+.taskName {
+  font-size: 1.2rem;
+}
+
+.taskError {
+  position: absolute;
+  bottom: 4px;
+  font-size: 12px;
+  color: red;
+}
+
+@media screen and (max-width: 650px) {
+  .card {
+    width: 100%;
+    height: 100%;
+    border: none;
+    min-width: 0px;
+    border-top: 1px solid black;
+    box-shadow: none;
+    border-radius: 0px;
+  }
+}
+
+@media screen and (max-height: 920px) {
+  .header {
+    margin: 1rem 0px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .header {
+    font-size: 3rem;
+    margin: 2rem 0px;
+  }
+
+  .searchContainer {
+    padding: 24px 12px;
+  }
+
+  .tasksContainer {
+    overflow-y: scroll;
+  }
+
+  .tasksContainer::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  .taskRow {
+    min-height: 64px;
+    padding: 0px 12px;
+  }
+
+  .taskName {
+    font-size: 1rem;
+  }
+
+  .taskRowButton {
+    font-size: 1.4rem;
+  }
+
+  .card {
+    border-top: 1px solid black;
+  }
+
+  .search,
+  .searchIcon {
+    font-size: 1.2rem;
+  }
+
+  .editTask {
+    font-size: 1rem;
+  }
+
+  .taskButton {
+    height: 2rem;
+    width: 3rem;
+  }
+}

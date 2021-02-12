@@ -8,10 +8,7 @@ const DemoUserButton = ({ login }) => {
   };
 
   return (
-    <button
-      onClick={handleClick}
-      className={`${styles.button} ${styles.demoUserButton}`}
-    >
+    <button onClick={handleClick} className={`button ${styles.demoUserButton}`}>
       Continue as Demo User
     </button>
   );

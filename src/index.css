@@ -10,6 +10,9 @@
   position: relative;
   width: 100vw;
   height: 100vh;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .centered {
@@ -17,4 +20,41 @@
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
+}
+
+.nav {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.button {
+  font-size: 1rem;
+  height: 40px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.no-border {
+  border-bottom: none !important;
+}
+
+@media screen and (max-width: 650px) {
+  .page-content {
+    padding: 1rem 0px;
+  }
+
+  .nav {
+    padding: 0px 12px;
+    box-sizing: border-box;
+  }
 }
