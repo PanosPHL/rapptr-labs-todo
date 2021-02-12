@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect, Suspense } from 'react';
 import { Switch, useHistory } from 'react-router-dom';
-import AuthRoute from './components/universal/AuthRoute';
+import { AuthRoute } from './components/universal';
 import Loading from './components/pages/Loading';
 
 const Home = React.lazy(() => import('./components/pages/Home'));

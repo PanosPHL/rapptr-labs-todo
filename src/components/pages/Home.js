@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import LogoutButton from '../buttons/LogoutButton';
-import TaskForm from '../forms/Task/TaskForm';
-import Task from '../misc/Task';
+import { LogoutButton } from '../buttons';
+import { TaskForm } from '../forms';
+import { Task } from '../misc';
 import styles from '../../css-modules/Tasks.module.css';
 
 const Home = ({ logout }) => {

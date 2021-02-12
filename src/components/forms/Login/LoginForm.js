@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useReducer, useRef } from 'react';
 import PropTypes from 'prop-types';
-import SubmitButton from '../../buttons/SubmitButton';
-import TextInput from '../inputs/TextInput';
+import { SubmitButton } from '../../buttons';
+import { TextInput } from '../inputs';
 import { validateEmail, validatePassword } from '../../../util/validations';
 import {
   SET_EMAIL,
