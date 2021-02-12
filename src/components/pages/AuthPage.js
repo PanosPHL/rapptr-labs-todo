@@ -7,6 +7,7 @@ import logo from '../../assets/rapptr_logo.png';
 import logoText from '../../assets/rapptr_logo_text.png';
 import { DemoUserButton } from '../buttons';
 
+// Created in the event a sign up form is also created in the same style
 const AuthPage = ({ type, login }) => {
   return (
     <section className={styles.section + ' centered'}>

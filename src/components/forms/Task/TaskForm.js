@@ -4,20 +4,24 @@ import { validateTask } from '../../../util/validations';
 import styles from '../../../css-modules/Tasks.module.css';
 
 const TaskForm = ({ type, initText, id, saveTask, setEditTask }) => {
+  // Initially set taskName to specified task
   const [taskName, setTaskName] = useState(type === 'edit' ? initText : '');
   const [error, setError] = useState(false);
   const inputRef = useRef();
 
+  // Auto-focus input on render
   useEffect(() => {
     inputRef.current.focus();
   }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
+    // Prevent submission with errors or no text
     if (error || !taskName.length) {
       return;
     }
 
+    // Dispatch saving task to tasks state
     saveTask(e, type, { id, name: taskName });
 
     if (type === 'edit') {
@@ -26,6 +30,7 @@ const TaskForm = ({ type, initText, id, saveTask, setEditTask }) => {
   };
 
   const onChange = (e) => {
+    // Check and set errors
     const validTask = validateTask(e.target.value);
     if (!validTask) {
       setError(true);
@@ -42,7 +47,7 @@ const TaskForm = ({ type, initText, id, saveTask, setEditTask }) => {
         <input
           value={taskName}
           onChange={onChange}
-          name={`edit-task-${taskName}`}
+          name={type === 'edit' ? `edit-task-${id}` : 'new-task-form'}
           className={styles.editTask}
           ref={inputRef}
         />

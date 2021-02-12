@@ -5,22 +5,26 @@ import styles from '../../css-modules/Tasks.module.css';
 
 const Task = ({ initText, id, saveTask, deleteTask, noBorder }) => {
   const [editTask, setEditTask] = useState(false);
+
+  const handleEditTask = () => {
+    setEditTask(true);
+  };
+
+  // Dispatch action to delete task from state
+  const handleDelClick = (e) => {
+    deleteTask(e, { id });
+  };
+
   return (
     <div className={styles.taskRow + (noBorder ? ' no-border' : '')}>
       {!editTask ? (
         <>
           <span className={styles.taskName}>{initText}</span>
           <div className={styles.taskRowButtons}>
-            <button
-              className={styles.taskRowButton}
-              onClick={() => setEditTask(true)}
-            >
+            <button className={styles.taskRowButton} onClick={handleEditTask}>
               <i className="fa fa-pencil" aria-hidden="true"></i>
             </button>
-            <button
-              className={styles.taskRowButton}
-              onClick={(e) => deleteTask(e, { id })}
-            >
+            <button className={styles.taskRowButton} onClick={handleDelClick}>
               <i className="fa fa-trash" aria-hidden="true"></i>
             </button>
           </div>

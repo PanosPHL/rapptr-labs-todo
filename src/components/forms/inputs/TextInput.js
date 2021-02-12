@@ -19,16 +19,19 @@ const TextInput = React.forwardRef(
     ref
   ) => {
     const onChange = (e) => {
+      // Check if valid input, set error accordingly
       if (!validator(e.target.value)) {
         handleErrorChange(type, 'set');
       } else {
         handleErrorChange(type, 'clear');
       }
 
+      // If submission error, clear it on input change
       if (validSubmissionError) {
         handleErrorChange('validSubmission', 'clear');
       }
 
+      // Set text value
       setValue(e.target.value);
     };
 

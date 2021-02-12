@@ -3,6 +3,7 @@ import { Switch, useHistory } from 'react-router-dom';
 import { AuthRoute } from './components/universal';
 import Loading from './components/pages/Loading';
 
+// Lazy loading to optimize performance
 const Home = React.lazy(() => import('./components/pages/Home'));
 const AuthPage = React.lazy(() => import('./components/pages/AuthPage'));
 
@@ -10,6 +11,7 @@ function App() {
   const [user, setUser] = useState(null);
   const history = useHistory();
 
+  // Retrieve user from localStorage if it exists
   useEffect(() => {
     const data = localStorage.getItem('user');
 
@@ -19,10 +21,12 @@ function App() {
     }
   }, []);
 
+  // Set user in localStorage
   useEffect(() => {
     localStorage.setItem('user', JSON.stringify({ user }));
   }, [user]);
 
+  // Memoize function to pass to optimized child components
   const login = useCallback(async (email, password) => {
     const res = await fetch(
       'http://dev.rapptrlabs.com/Tests/scripts/user-login.php',
@@ -31,6 +35,7 @@ function App() {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
+        // Build query string
         body: [
           `email=${encodeURIComponent(email)}`,
           `password=${encodeURIComponent(password)}`,
@@ -38,6 +43,7 @@ function App() {
       }
     );
 
+    // If successful login, redirect
     if (res.ok) {
       res.data = await res.json();
       setUser(res.data);
@@ -45,6 +51,7 @@ function App() {
       return;
     }
 
+    // Otherwise handle error in next function
     return res;
   }, []);
 

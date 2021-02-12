@@ -4,7 +4,7 @@ import styles from '../../css-modules/Login.module.css';
 
 const DemoUserButton = ({ login }) => {
   const handleClick = async () => {
-    const res = await login('test@rapptrlabs.com', 'Test123');
+    await login('test@rapptrlabs.com', 'Test123');
   };
 
   return (

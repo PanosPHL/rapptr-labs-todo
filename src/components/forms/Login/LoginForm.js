@@ -63,10 +63,12 @@ const LoginForm = ({ login }) => {
   );
   const emailRef = useRef();
 
+  // Auto-focus form on render
   useEffect(() => {
     emailRef.current.focus();
   }, []);
 
+  // Memoize functions w/useCallback to prevent rerenders on memoized child components
   const handleEmailChange = useCallback((email) => {
     dispatch({ type: SET_EMAIL, payload: email });
   }, []);
@@ -84,20 +86,25 @@ const LoginForm = ({ login }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    // Don't allow submission if errors exist
     if (errors.email || errors.password) {
       return;
     }
 
+    // Login
     dispatch({ type: SET_FETCHING, payload: true });
 
     const res = await login(email, password);
 
     dispatch({ type: SET_FETCHING, payload: false });
 
+    // Server error
     if (res.status >= 500) {
       dispatch({ type: SET_ERROR, payload: 'submit' });
       return;
-    } else {
+    }
+    // Invalid login
+    else {
       dispatch({ type: SET_ERROR, payload: 'validSubmission' });
       return;
     }

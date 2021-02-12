@@ -6,11 +6,14 @@ import { Task } from '../misc';
 import styles from '../../css-modules/Tasks.module.css';
 
 const Home = ({ logout }) => {
+  // Sets presentational state for new task form
   const [newTask, setNewTask] = useState(false);
   const [tasks, setTasks] = useState([]);
+  // Store IDs to use in keys for map method
   const [idNum, setIdNum] = useState(0);
   const [search, setSearch] = useState('');
 
+  // Load task state if it exists in localStorage
   useEffect(() => {
     const data = localStorage.getItem('taskState');
 
@@ -22,6 +25,7 @@ const Home = ({ logout }) => {
     }
   }, []);
 
+  // Set task state in localStorage on update of id or tasks
   useEffect(() => {
     localStorage.setItem(
       'taskState',
@@ -32,11 +36,13 @@ const Home = ({ logout }) => {
     );
   }, [idNum, tasks]);
 
+  // Memoize functions to prevent rerenders of optimized child components
   const saveTask = useCallback(
     (e, type, task) => {
       e.preventDefault();
 
       if (type === 'new') {
+        // Use previous state callbacks as React state does not update synchronously
         setTasks((tasks) => [...tasks, task]);
         setIdNum((prevState) => prevState + 1);
         setNewTask(false);
@@ -117,7 +123,7 @@ const Home = ({ logout }) => {
                   if (!search.length) {
                     return true;
                   }
-
+                  // Create regex to match search string case-agnostic
                   const regex = new RegExp(search, 'i');
 
                   return regex.test(name);
