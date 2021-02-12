@@ -4,7 +4,7 @@ import styles from '../../css-modules/Login.module.css';
 
 const DemoUserButton = ({ login }) => {
   const handleClick = async () => {
-    await login('test@rapptrlabs.com', 'Test123');
+    await login('placeholder', 'placeholder');
   };
 
   return (
